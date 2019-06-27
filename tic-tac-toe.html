@@ -19,6 +19,10 @@ th, td {
 
 <body>
 
+<p>Press a key on the keyboard in the input field.</p>
+
+<input type="text" size="40" onkeydown="registerKeyPress(event)">
+
 <table style="width:60%">
   <tr>
     <th id="1"></th>
@@ -38,19 +42,29 @@ th, td {
 </table>
 
 <script>
+function registerKeyPress(event) {
+  var x = event.key;
+  NextTurn(x);
+}
+
+var player = "x";
+
+function NextTurn(square) {
+  document.getElementById(square).innerHTML = player;
+}
 
 var player1
 
 function startGame(){
   do { 
     player1 = prompt("Would you like to be an x or an o? (enter x or o)");
-  } while player1 != "x";
+  } while (player1 != 'x');
 }
 
+
+
+
 startGame();
-
-
-var key = e.which || e.keyCode;
 
 </script>
 
