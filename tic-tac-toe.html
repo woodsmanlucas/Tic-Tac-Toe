@@ -46,18 +46,41 @@ th, td {
 <script>
 function registerKeyPress(event) {
   var x = event.key;
-  NextTurn(x);
+  console.log(x)
+  var a = true;
+  var list = xlist + olist;
+  var y;
+
+    for (y in list) {
+      if (y == x) {
+        a = false;
+      }
+      else {
+      }
+  }
+
+  if (a == true) {
+    NextTurn(x);
+  }
+  else {
+    alert("This key has been hit before");
+  }
 }
 
 var player = "X";
+var xlist = ""; var olist = "";
 
 function NextTurn(square) {
   document.getElementById(square).innerHTML = player;
   if (player == "X"){
    player = "O";
+   xlist += square;
+   console.log(xlist);
   }
   else {
     player = "X";
+    olist += square;
+    console.log(olist);
   }
 }
 
@@ -66,13 +89,13 @@ var player1
 function startGame(){
   do { 
     player1 = prompt("Would you like to be an x or an o? (enter x or o)");
-  } while (player1 != 'x');
+  } while (player1 != 'x' && player1 != 'o');
 }
 
-
-
-
 startGame();
+
+
+
 
 </script>
 
