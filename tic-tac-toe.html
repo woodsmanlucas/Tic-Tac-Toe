@@ -67,7 +67,7 @@ function registerKeyPress(event) {
   }
 }
 
-var player = "X";
+var player;
 var xlist = ""; var olist = "";
 
 function NextTurn(square) {
@@ -82,18 +82,45 @@ function NextTurn(square) {
     olist += square;
     console.log(olist);
   }
+  checkVerticalWin(olist);
+  checkVerticalWin(xlist);
 }
 
-var player1
+
+
+function checkVerticalWin(list) {
+  function check(list, value){
+    var x;
+    for (x in list) {
+      if(list[x] == value) {
+        return true;
+      }
+    }
+   }
+
+
+  count = 1
+  while(count <= 3 ) {
+    if(check(list, count)) {
+      if(check(list, count + 3)) {
+        if(check(list, count + 6)) {
+            console.log("WIN!");
+        }
+      }
+    }
+   count++
+  }
+}
 
 function startGame(){
   do { 
-    player1 = prompt("Would you like to be an x or an o? (enter x or o)");
-  } while (player1 != 'x' && player1 != 'o');
+    player = prompt("Would you like to be an x or an o? (enter x or o)");
+  } while (player != 'x' && player != 'o');
+
+  player = player.toUpperCase();
 }
 
 startGame();
-
 
 
 
