@@ -82,35 +82,67 @@ function NextTurn(square) {
     olist += square;
     console.log(olist);
   }
-  checkVerticalWin(olist);
-  checkVerticalWin(xlist);
+  if (checkVerticalWin(olist)) {
+    document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
+  if (checkVerticalWin(xlist)) {
+    document.getElementById("WIN").innerHTML = "X Wins! Game Over"
+  }
+  if (checkDiagonalWin1(xlist.sort())) {
+    document.getElementById("WIN").innerHTML = "X Wins! Game Over"
+  }
+  if (checkDiagonalWin1(olist.sort())) {
+    document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
 }
 
 
 
+function check(list, value){
+  var x;
+  for (x in list) {
+    if(list[x] == value) {
+      return true
+     }
+  }
+}
+
 function checkVerticalWin(list) {
-  function check(list, value){
-    var x;
-    for (x in list) {
-      if(list[x] == value) {
-        return true;
-      }
-    }
-   }
-
-
   count = 1
   while(count <= 3 ) {
     if(check(list, count)) {
       if(check(list, count + 3)) {
         if(check(list, count + 6)) {
             console.log("WIN!");
+            return true
         }
       }
     }
    count++
   }
 }
+
+function checkDiagonalWin1(list) {
+  if(check(list, 1)){
+    if(check(list, 5)){
+      if(check(list, 9)){
+        return true;
+      }
+    }
+  }
+}
+
+function checkDiagonalWin2(list) {
+  if(check(list, 3)){
+    if(check(list, 5)){
+      if(check(list, 7)){
+        return true;
+      }
+    }
+  }
+}
+
+
 
 function startGame(){
   do { 
