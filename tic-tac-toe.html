@@ -52,7 +52,7 @@ function registerKeyPress(event) {
   var y;
 
     for (y in list) {
-      if (y == x) {
+      if (list[y] == x) {
         a = false;
       }
       else {
@@ -68,18 +68,18 @@ function registerKeyPress(event) {
 }
 
 var player;
-var xlist = ""; var olist = "";
+var xlist = []; var olist = [];
 
 function NextTurn(square) {
   document.getElementById(square).innerHTML = player;
   if (player == "X"){
    player = "O";
-   xlist += square;
+   xlist[xlist.length] = square;
    console.log(xlist);
   }
   else {
     player = "X";
-    olist += square;
+    olist[olist.length] = square;
     console.log(olist);
   }
   if (checkVerticalWin(olist)) {
@@ -93,6 +93,18 @@ function NextTurn(square) {
   }
   if (checkDiagonalWin1(olist.sort())) {
     document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
+  if (checkDiagonalWin2(xlist.sort())) {
+    document.getElementById("WIN").innerHTML = "X Wins! Game Over"
+  }
+  if (checkDiagonalWin2(olist.sort())) {
+    document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
+  if (checkHorizontalWin(olist.sort())){
+    document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
+  if (checkHorizontalWin(xlist.sort())){
+    document.getElementById("WIN").innerHTML = "X Wins! Game Over"
   }
 }
 
@@ -119,6 +131,30 @@ function checkVerticalWin(list) {
       }
     }
    count++
+  }
+}
+
+function checkHorizontalWin(list) {
+  if (check(list, 1)){
+    if (check(list, 2)){
+      if (check(list, 3)){
+        return true
+      }
+    }
+  }
+  else if (check(list, 4)){
+    if (check(list, 5)){
+      if (check(list, 6)){
+        return true
+      }
+    }
+  }
+  else if (check(list, 7)){
+    if (check(list, 8)){
+      if (check(list, 9)){
+        return true
+      }
+    }
   }
 }
 
