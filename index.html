@@ -182,10 +182,11 @@ function checkDiagonalWin2(list) {
 
 function startGame(){
   do { 
-    player = prompt("Would you like to be an x or an o? (enter x or o)");
-  } while (player != 'x' && player != 'o');
+     player = prompt("Would you like to be an x or an o? (enter x or o)");
+     player = player.toUpperCase();
+  } while (player != 'X' && player != 'O');
 
-  player = player.toUpperCase();
+
 }
 
 startGame();
