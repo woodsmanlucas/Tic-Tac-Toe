@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-top: 150px;
+  margin-left: 250px;
+  margin-right: 250px;
+}
+th, td {
+  padding: 40px;
+  text-align: center;    
+}
+
+</style>
+</head>
+
+<body>
+
+<p>Press a key on the keyboard in the input field.</p>
+
+<input type="text" size="40" onkeydown="registerKeyPress(event)">
+
+<h1 id="WIN"></h1>
+
+<table style="width:60%">
+  <tr>
+    <th id="1">1</th>
+    <th id="2">2</th>
+    <th id="3">3</th>
+  </tr>
+  <tr>
+    <th id="4">4</th>
+    <th id="5">5</th>
+    <th id="6">6</th>
+  </tr>
+  <tr>
+    <th id="7">7</th>
+    <th id="8">8</th>
+    <th id="9">9</th>
+  </tr>
+</table>
+
+<script>
+function registerKeyPress(event) {
+  var x = event.key;
+  console.log(x)
+  var a = true;
+  var list = xlist + olist;
+  var y;
+
+    for (y in list) {
+      if (list[y] == x) {
+        a = false;
+      }
+      else {
+      }
+  }
+
+  if (a == true) {
+    NextTurn(x);
+  }
+  else {
+    alert("This key has been hit before");
+  }
+}
+
+var player;
+var xlist = []; var olist = [];
+
+function NextTurn(square) {
+  document.getElementById(square).innerHTML = player;
+  if (player == "X"){
+   player = "O";
+   xlist[xlist.length] = square;
+   console.log(xlist);
+  }
+  else {
+    player = "X";
+    olist[olist.length] = square;
+    console.log(olist);
+  }
+  if (checkVerticalWin(olist)) {
+    document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
+  if (checkVerticalWin(xlist)) {
+    document.getElementById("WIN").innerHTML = "X Wins! Game Over"
+  }
+  if (checkDiagonalWin1(xlist.sort())) {
+    document.getElementById("WIN").innerHTML = "X Wins! Game Over"
+  }
+  if (checkDiagonalWin1(olist.sort())) {
+    document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
+  if (checkDiagonalWin2(xlist.sort())) {
+    document.getElementById("WIN").innerHTML = "X Wins! Game Over"
+  }
+  if (checkDiagonalWin2(olist.sort())) {
+    document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
+  if (checkHorizontalWin(olist.sort())){
+    document.getElementById("WIN").innerHTML = "O Wins! Game Over"
+  }
+  if (checkHorizontalWin(xlist.sort())){
+    document.getElementById("WIN").innerHTML = "X Wins! Game Over"
+  }
+}
+
+
+
+function check(list, value){
+  var x;
+  for (x in list) {
+    if(list[x] == value) {
+      return true
+     }
+  }
+}
+
+function checkVerticalWin(list) {
+  count = 1
+  while(count <= 3 ) {
+    if(check(list, count)) {
+      if(check(list, count + 3)) {
+        if(check(list, count + 6)) {
+            console.log("WIN!");
+            return true
+        }
+      }
+    }
+   count++
+  }
+}
+
+function checkHorizontalWin(list) {
+  if (check(list, 1)){
+    if (check(list, 2)){
+      if (check(list, 3)){
+        return true
+      }
+    }
+  }
+  else if (check(list, 4)){
+    if (check(list, 5)){
+      if (check(list, 6)){
+        return true
+      }
+    }
+  }
+  else if (check(list, 7)){
+    if (check(list, 8)){
+      if (check(list, 9)){
+        return true
+      }
+    }
+  }
+}
+
+function checkDiagonalWin1(list) {
+  if(check(list, 1)){
+    if(check(list, 5)){
+      if(check(list, 9)){
+        return true;
+      }
+    }
+  }
+}
+
+function checkDiagonalWin2(list) {
+  if(check(list, 3)){
+    if(check(list, 5)){
+      if(check(list, 7)){
+        return true;
+      }
+    }
+  }
+}
+
+
+
+function startGame(){
+  do { 
+    player = prompt("Would you like to be an x or an o? (enter x or o)");
+  } while (player != 'x' && player != 'o');
+
+  player = player.toUpperCase();
+}
+
+startGame();
+
+
+
+</script>
+
+</body>
+
+</html>
