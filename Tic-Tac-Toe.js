@@ -1,3 +1,6 @@
+var player;
+var xlist = []; var olist = [];
+
 startGame();
 
 $(document).ready(function(){
@@ -26,12 +29,10 @@ function registerClick(x) {
     NextTurn(x);
   }
   else {
-    alert("This key has been hit before");
+    alert("This square has been hit before");
   }
 }
 
-var player;
-var xlist = []; var olist = [];
 
 function NextTurn(square) {
   document.getElementById(square).innerHTML = player;
@@ -69,8 +70,8 @@ function NextTurn(square) {
   if (checkHorizontalWin(xlist.sort())){
     document.getElementById("WIN").innerHTML = "X Wins! Game Over"
   }
-    if checkCatsGame((xlist+olist).sort()){
-	document.getElementById("WIN").innerHTML = "Cats Game"
+    if (checkCatsGame((xlist + olist).sort())){
+	document.getElementById("WIN").innerHTML = "Cats Game";
     }
 
 }
@@ -147,22 +148,21 @@ function checkDiagonalWin2(list) {
 }
 
 function checkCatsGame(list) {
-    var x
+    var x;
     for (x in range(1, 10)){
-	if !check(list, x){
-	    return false
+	if (!check(list, x)){
+	    return false;
 	}
     }
-    return true
+    return true;
 }
 
 
 function startGame(){
-  do { 
+    do {
     player = prompt("Would you like to be an x or an o? (enter x or o)");
     player = player.toUpperCase();
   } while (player != 'X' && player != 'O');
 
 }
-
 
