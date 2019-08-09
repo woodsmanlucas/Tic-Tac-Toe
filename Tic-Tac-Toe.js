@@ -1,3 +1,5 @@
+startGame();
+
 $(document).ready(function(){
   $("th").click(function(){
       registerClick($(this).attr('id'))
@@ -162,7 +164,5 @@ function startGame(){
   } while (player != 'X' && player != 'O');
 
 }
-
-startGame();
 
 
