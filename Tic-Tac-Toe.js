@@ -1,13 +1,12 @@
 $(document).ready(function(){
   $("th").click(function(){
-      NextTurn($(this).attr('id'))
+      registerClick($(this).attr('id'))
   });
 });
 
   
 
-function registerKeyPress(event) {
-  var x = event.key;
+function registerClick(x) {
   console.log(x)
   var a = true;
   var list = xlist + olist;
@@ -68,6 +67,10 @@ function NextTurn(square) {
   if (checkHorizontalWin(xlist.sort())){
     document.getElementById("WIN").innerHTML = "X Wins! Game Over"
   }
+    if checkCatsGame((xlist+olist).sort()){
+	document.getElementById("WIN").innerHTML = "Cats Game"
+    }
+
 }
 
 
@@ -141,6 +144,15 @@ function checkDiagonalWin2(list) {
   }
 }
 
+function checkCatsGame(list) {
+    var x
+    for (x in range(1, 10)){
+	if !check(list, x){
+	    return false
+	}
+    }
+    return true
+}
 
 
 function startGame(){
