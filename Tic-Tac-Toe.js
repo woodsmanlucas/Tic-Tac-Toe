@@ -1,5 +1,5 @@
 var player;
-var xlist = []; var olist = [];
+var xlist = []; var olist = []; var array = [];
 
 startGame();
 
@@ -14,11 +14,10 @@ $(document).ready(function(){
 function registerClick(x) {
   console.log(x)
   var a = true;
-  var list = xlist + olist;
   var y;
 
-    for (y in list) {
-      if (list[y] == x) {
+    for (y in array) {
+      if (array[y] == x) {
         a = false;
       }
       else {
@@ -35,7 +34,8 @@ function registerClick(x) {
 
 
 function NextTurn(square) {
-  document.getElementById(square).innerHTML = player;
+    document.getElementById(square).innerHTML = player;
+    array[array.lenght] = square;
   if (player == "X"){
    player = "O";
    xlist[xlist.length] = square;
@@ -70,7 +70,7 @@ function NextTurn(square) {
   if (checkHorizontalWin(xlist.sort())){
     document.getElementById("WIN").innerHTML = "X Wins! Game Over"
   }
-    if (checkCatsGame((xlist + olist).sort())){
+    if (checkCatsGame(array.sort())){
 	document.getElementById("WIN").innerHTML = "Cats Game";
     }
 
@@ -137,20 +137,20 @@ function checkDiagonalWin1(list) {
   }
 }
 
-function checkDiagonalWin2(list) {
-  if(check(list, 3)){
-    if(check(list, 5)){
-      if(check(list, 7)){
+function checkDiagonalWin2(l) {
+  if(check(l, 3)){
+    if(check(l, 5)){
+      if(check(l, 7)){
         return true;
       }
     }
   }
 }
 
-function checkCatsGame(list) {
+function checkCatsGame(l) {
     var x;
-    for (x in range(1, 10)){
-	if (!check(list, x)){
+    for (x in [1,2,3,4,5,6,7,8,9]){
+	if (!check(l, x)){
 	    return false;
 	}
     }
