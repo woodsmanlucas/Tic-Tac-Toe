@@ -1,5 +1,6 @@
 var player;
 var xlist = []; var olist = []; var array = [];
+var i = 0;
 
 startGame();
 
@@ -46,6 +47,12 @@ function NextTurn(square) {
     olist[olist.length] = square;
     console.log(olist);
   }
+    i = i + 1;
+    console.log("count: " + i);
+    if (i == 9){
+	document.getElementById("WIN").innerHTML = "Cats Game";
+    }
+  
   if (checkVerticalWin(olist)) {
     document.getElementById("WIN").innerHTML = "O Wins! Game Over"
   }
@@ -70,10 +77,6 @@ function NextTurn(square) {
   if (checkHorizontalWin(xlist.sort())){
     document.getElementById("WIN").innerHTML = "X Wins! Game Over"
   }
-    if (checkCatsGame(array.sort())){
-	document.getElementById("WIN").innerHTML = "Cats Game";
-    }
-
 }
 
 
@@ -146,17 +149,6 @@ function checkDiagonalWin2(l) {
     }
   }
 }
-
-function checkCatsGame(l) {
-    var x;
-    for (x in [1,2,3,4,5,6,7,8,9]){
-	if (!check(l, x)){
-	    return false;
-	}
-    }
-    return true;
-}
-
 
 function startGame(){
     do {
